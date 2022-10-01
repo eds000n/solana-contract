@@ -58,7 +58,7 @@ fn create_mint_account(wallet_keypair: &Keypair, client: &RpcClient) -> Pubkey {
     )
     .unwrap();
 
-    let (recent_blockhash, _fee_calculator) = client.get_recent_blockhash().unwrap();
+    let recent_blockhash = client.get_latest_blockhash().unwrap();
 
     let transaction: Transaction = Transaction::new_signed_with_payer(
         &vec![create_account_instruction, initialize_mint_instruction],
@@ -105,7 +105,7 @@ fn create_token_account(
     )
     .unwrap();
 
-    let (recent_blockhash, _fee_calculator) = client.get_recent_blockhash().unwrap();
+    let recent_blockhash = client.get_latest_blockhash().unwrap();
 
     let transaction: Transaction = Transaction::new_signed_with_payer(
         &vec![create_account_instruction, initialize_account2_instruction],
@@ -143,7 +143,7 @@ fn mint_nft(
     )
     .unwrap();
 
-    let (recent_blockhash, _fee_calculator) = client.get_recent_blockhash().unwrap();
+    let recent_blockhash = client.get_latest_blockhash().unwrap();
     let transaction: Transaction = Transaction::new_signed_with_payer(
         &vec![mint_to_instruction],
         Some(&wallet_pubkey),
@@ -181,7 +181,7 @@ fn create_metadata_account(
 
     // Test Metadata
     let name = String::from("Jeff NFT");
-    let symbol = String::from(J");
+    let symbol = String::from("J");
     let uri = String::from("https://solana.com");
 
     let new_metadata_instruction = create_metadata_accounts(
@@ -200,7 +200,7 @@ fn create_metadata_account(
         false,
     );
 
-    let (recent_blockhash, _fee_calculator) = client.get_recent_blockhash().unwrap();
+    let recent_blockhash = client.get_latest_blockhash().unwrap();
 
     let transaction: Transaction = Transaction::new_signed_with_payer(
         &vec![new_metadata_instruction],
@@ -251,7 +251,7 @@ fn upgrade_to_master_edition(
         Some(1),
     );
 
-    let (recent_blockhash, _fee_calculator) = client.get_recent_blockhash().unwrap();
+    let recent_blockhash = client.get_latest_blockhash().unwrap();
     let transaction: Transaction = Transaction::new_signed_with_payer(
         &vec![master_edition_instruction],
         Some(&wallet_pubkey),
